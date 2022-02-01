@@ -59,5 +59,4 @@ def max_min_type_fighting_generation_i_pokemon():
             pokemons.append(int(details["weight"]))
 
     pokemons.sort()
-    return pokemons[-1], pokemons[0]
-
+    return [pokemons[-1], pokemons[0]]
