@@ -10,7 +10,7 @@ def request_data(pattern):
     return body
 
 
-def pokemon_name_macht():
+def macht_pokemon_name():
     # Get the number of pokemon (count)
     query_parameter = "pokemon?limit=1"
     body = request_data(query_parameter)
@@ -30,7 +30,7 @@ def pokemon_name_macht():
     return count_match
 
 
-def species_raichu_can_procreate():
+def count_species_raichu_can_procreate_with():
     pattern = "pokemon-species/raichu"
     body = request_data(pattern)
     egg_groups = body['egg_groups']
@@ -44,7 +44,7 @@ def species_raichu_can_procreate():
     return total_species
 
 
-def max_min_type_fighting_generation_i_pokemon():
+def get_max_min_weight_fighting_type_generation_i_pokemon():
     pokemons = []
     id_max_generation_1 = 151
     fighting_type = request_data("/type/2")
@@ -60,3 +60,9 @@ def max_min_type_fighting_generation_i_pokemon():
 
     pokemons.sort()
     return [pokemons[-1], pokemons[0]]
+
+
+if __name__ == '__main__':
+    print(macht_pokemon_name())
+    print(count_species_raichu_can_procreate_with())
+    print(get_max_min_weight_fighting_type_generation_i_pokemon())
