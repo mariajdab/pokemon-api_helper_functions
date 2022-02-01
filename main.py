@@ -4,7 +4,7 @@ import re
 BASE_URL = "https://pokeapi.co/api/v2/"
 
 
-def new_request(pattern):
+def request_data(pattern):
     response = requests.get(BASE_URL + pattern)
     body = response.json()
     return body
@@ -13,12 +13,12 @@ def new_request(pattern):
 def pokemon_name_macht():
     # Get the number of pokemon (count)
     query_parameter = "pokemon?limit=1"
-    body = new_request(query_parameter)
+    body = request_data(query_parameter)
     count = body['count']
 
     # Get all the pokemon
     query_parameter = "pokemon?limit={}".format(count)
-    body = new_request(query_parameter)
+    body = request_data(query_parameter)
 
     count_match = 0
 
@@ -32,7 +32,7 @@ def pokemon_name_macht():
 
 def species_raichu_can_procreate():
     pattern = "pokemon-species/raichu"
-    body = new_request(pattern)
+    body = request_data(pattern)
     egg_groups = body['egg_groups']
 
     total_species = 0
@@ -47,7 +47,7 @@ def species_raichu_can_procreate():
 def max_min_type_fighting_generation_i_pokemon():
     pokemons = []
     id_max_generation_1 = 151
-    fighting_type = new_request("/type/2")
+    fighting_type = request_data("/type/2")
 
     for pokemon in fighting_type["pokemon"]:
         id = re.findall('[0-9]+', pokemon["pokemon"]["url"][33:])
@@ -55,8 +55,9 @@ def max_min_type_fighting_generation_i_pokemon():
         if int(id[0]) <= id_max_generation_1:
             name = pokemon["pokemon"]["name"]
             url_pattern = "pokemon/{}".format(name)
-            details = new_request(url_pattern)
+            details = request_data(url_pattern)
             pokemons.append(int(details["weight"]))
 
     pokemons.sort()
     return pokemons[-1], pokemons[0]
+
