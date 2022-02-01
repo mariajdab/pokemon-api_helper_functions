@@ -44,7 +44,7 @@ def species_raichu_can_procreate():
     return total_species
 
 
-def type_fighting_generation_i_pokemon():
+def max_min_type_fighting_generation_i_pokemon():
     pokemons = []
     id_max_generation_1 = 151
     fighting_type = new_request("/type/2")
