@@ -34,14 +34,13 @@ def count_species_raichu_can_procreate_with():
     pattern = "pokemon-species/raichu"
     body = request_data(pattern)
     egg_groups = body['egg_groups']
-
-    total_species = 0
+    species_set = set()
     for egg_group in egg_groups:
         response = requests.get(egg_group['url'])
         body = response.json()
-        total_species += len(body['pokemon_species'])
+        species_set.update([p['name'] for p in (body['pokemon_species'])])
 
-    return total_species
+    return len(species_set)-1
 
 
 def get_max_min_weight_fighting_type_generation_i_pokemon():
